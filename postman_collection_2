@@ -1,0 +1,212 @@
+{
+    "info": {
+        "_postman_id": "a5413450-8a1c-4c90-9270-541ee478d3c9",
+        "name": "node_chat",
+        "description": "Node 1 - Afternoon",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "http://localhost:3001/api/messages",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "const res = JSON.parse( responseBody );",
+                            "const resLength = ( res.length === 1 );",
+                            "const resText = ( res[0].text === \"Text 0\");",
+                            "const resTime = ( res[0].time === \"Time 0\");",
+                            "",
+                            "tests['API can create messages.'] = resLength && resText && resTime;"
+                        ]
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"text\": \"Text 0\",\n\t\"time\": \"Time 0\"\n}"
+                },
+                "url": "http://localhost:3001/api/messages"
+            },
+            "response": []
+        },
+        {
+            "name": "http://localhost:3001/api/messages",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"text\": \"Text 1\",\n\t\"time\": \"Time 1\"\n}"
+                },
+                "url": "http://localhost:3001/api/messages"
+            },
+            "response": []
+        },
+        {
+            "name": "http://localhost:3001/api/messages",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "const res = JSON.parse( responseBody );",
+                            "const resLength = ( res.length === 3 );",
+                            "",
+                            "const resText = ( res[2].text === \"Text 2\");",
+                            "const resTime = ( res[2].time === \"Time 2\");",
+                            "",
+                            "tests['API can create messages.'] = resLength && resText && resTime;"
+                        ]
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"text\": \"Text 2\",\n\t\"time\": \"Time 2\"\n}"
+                },
+                "url": "http://localhost:3001/api/messages"
+            },
+            "response": []
+        },
+        {
+            "name": "http://localhost:3001/api/messages",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "const res = JSON.parse( responseBody );",
+                            "const isArray = ( Array.isArray( res ) );",
+                            "const resLength = ( res.length === 3 );",
+                            "",
+                            "tests[\"API can fetch messages.\"] = isArray && resLength;"
+                        ]
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": []
+                },
+                "url": "http://localhost:3001/api/messages"
+            },
+            "response": []
+        },
+        {
+            "name": "http://localhost:3001/api/messages",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "const res = JSON.parse( responseBody );",
+                            "const isArray = ( Array.isArray( res ) );",
+                            "const updated = ( res[0].text === \"Updated\" );",
+                            "",
+                            "tests[\"API can update messages\"] = isArray && updated;"
+                        ]
+                    }
+                }
+            ],
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"text\": \"Updated\"\n}"
+                },
+                "url": "http://localhost:3001/api/messages/0"
+            },
+            "response": []
+        },
+        {
+            "name": "http://localhost:3001/api/messages",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": []
+                },
+                "url": "http://localhost:3001/api/messages/0"
+            },
+            "response": []
+        },
+        {
+            "name": "http://localhost:3001/api/messages",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": []
+                },
+                "url": "http://localhost:3001/api/messages/1"
+            },
+            "response": []
+        },
+        {
+            "name": "http://localhost:3001/api/messages",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "const res = JSON.parse( responseBody );",
+                            "const isArray = ( Array.isArray( res ) );",
+                            "const resLength = ( res.length === 0 );",
+                            "",
+                            "tests[\"API can delete messages\"] = isArray && resLength;"
+                        ]
+                    }
+                }
+            ],
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": []
+                },
+                "url": "http://localhost:3001/api/messages/2"
+            },
+            "response": []
+        }
+    ]
+}
